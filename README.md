@@ -7,6 +7,12 @@
 - returns `std::future<R>` (R deduced with `std::invoke_result_t`) so the caller can retrieve the task's result later
 - drains pending tasks on destruction before workers exit
 
+### Modern C++ constructs (threadpool_modern.hpp)
+
+- use jthread which avoids the need of calling destructing threads joining manually
+- use `std::stop_token` in thread param so that when jthread joins it implicitly calls worker.request_stop()
+- use `condition_variable_any` to pair with jthread so that wait take second arg as stop_token
+  
 ## build
 
 ```bash
