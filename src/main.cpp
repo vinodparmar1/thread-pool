@@ -1,5 +1,6 @@
 
 #include "threadpool.hpp"
+#include "threadpool_modern.hpp"
 
 #include <iostream>
 
@@ -23,5 +24,10 @@ int main() {
     tp.submit(fun1, "hello");
     std::cout << "return value from task: " << ret.get() << "\n";
     std::thread(fun, 5, 'a').join();
+
+    ThreadpoolM tpm(2);
+    tpm.submit(fun, 15, 'd');
+    tpm.submit(fun1, "hello");
+
     return 0;
 }
